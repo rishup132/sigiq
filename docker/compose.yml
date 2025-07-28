@@ -1,0 +1,37 @@
+services:
+  app_blue:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: app_blue
+    environment:
+      - DJANGO_SETTINGS_MODULE=app.settings
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../app:/app
+    ports:
+      - "8001:8000"
+
+  app_green:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: app_green
+    environment:
+      - DJANGO_SETTINGS_MODULE=app.settings
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../app:/app
+    ports:
+      - "8002:8000"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites:/etc/nginx/sites-available
+      - ./nginx/promote.sh:/usr/local/bin/promote.sh
+    command: /bin/bash -c "mkdir -p /etc/nginx/sites-enabled && cp /etc/nginx/sites-available/blue.conf /etc/nginx/sites-enabled/default.conf && nginx -g 'daemon off;'"
