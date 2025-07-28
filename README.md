@@ -41,6 +41,11 @@ This project focuses on implementing a production-ready WebSocket service using 
    {"ts": "2025-07-28T12:34:56.000Z"}
    ```
 
+6. **Ngnix Proxy**: (default : blue)
+   ```bash
+   docker exec nginx_proxy promote.sh green/blue 
+   ```
+   
 ---
 
 ## Testing the WebSocket
