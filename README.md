@@ -35,6 +35,11 @@ This project focuses on implementing a production-ready WebSocket service using 
    ```
    /ws/chat/
    ```
+   
+5. **Heartbeat Broadcast**: Every 30 seconds, the server broadcasts a timestamp message to all active WebSocket clients:
+   ```
+   {"ts": "2025-07-28T12:34:56.000Z"}
+   ```
 
 ---
 
