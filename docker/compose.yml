@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   app_blue:
     build:
@@ -29,9 +31,16 @@ services:
     image: nginx:latest
     container_name: nginx_proxy
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/sites:/etc/nginx/sites-available
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/upstream.conf.template:/etc/nginx/upstream.conf.template:ro
       - ./nginx/promote.sh:/usr/local/bin/promote.sh
-    command: /bin/bash -c "mkdir -p /etc/nginx/sites-enabled && cp /etc/nginx/sites-available/blue.conf /etc/nginx/sites-enabled/default.conf && nginx -g 'daemon off;'"
+      - nginx_conf:/etc/nginx/conf.d
+    entrypoint: /bin/sh -c "sed 's/__TARGET__/app_blue/' /etc/nginx/upstream.conf.template > /etc/nginx/conf.d/upstream.conf && exec nginx -g 'daemon off;'"
+    depends_on:
+      - app_blue
+      - app_green
+
+volumes:
+  nginx_conf:
