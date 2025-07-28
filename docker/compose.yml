@@ -9,6 +9,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
       - PYTHONUNBUFFERED=1
+      - APP_VERSION=blue
     volumes:
       - ../app:/app
     ports:
@@ -22,6 +23,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
       - PYTHONUNBUFFERED=1
+      - APP_VERSION=green
     volumes:
       - ../app:/app
     ports:
