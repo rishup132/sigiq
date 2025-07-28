@@ -6,5 +6,6 @@ services:
     container_name: app_blue
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
+      - PYTHONUNBUFFERED=1
     ports:
       - "8000:8000"
