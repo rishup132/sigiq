@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app_blue:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: app_blue
+    environment:
+      - DJANGO_SETTINGS_MODULE=app.settings
+    volumes:
+      - ../app:/app
+    ports:
+      - "8000:8000"

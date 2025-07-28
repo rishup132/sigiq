@@ -1,0 +1,31 @@
+# SigIQ WebSocket Service – Production-Ready Backend (WIP)
+
+This project focused on implementing a production-ready WebSocket service using Django, Channels, and Docker.
+
+---
+
+## Tech Stack
+
+- Django 4.2
+- Django Channels 4.x
+- Uvicorn ASGI server
+- Python 3.11
+- Docker + Docker Compose
+
+---
+
+## How to Run (Dev)
+
+1. **Clone the repository**:
+```bash
+git clone <your-repo-url>
+cd sigiq_ws_project
+```
+
+2. **Build & Run Docker**:
+```bash
+cd docker
+docker compose -f compose.yml up --build
+```
+
+3. **Access in Browser**: http://localhost:8000
