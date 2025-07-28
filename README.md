@@ -131,3 +131,6 @@ The application exposes two lightweight HTTP endpoints for monitoring and valida
     ```javascript
     ws.close(1000, "closing");
     ```
+
+## Smoke Test
+1. Run `pytest tests` from app/ folder.
