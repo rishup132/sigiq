@@ -132,5 +132,19 @@ The application exposes two lightweight HTTP endpoints for monitoring and valida
     ws.close(1000, "closing");
     ```
 
-## Smoke Test
-1. Run `pytest tests` from app/ folder.
+## Smoke and Load Test (MACOS)
+1. Go to `/app` folder
+2. Create a virtual envionment
+    ```python
+    python3 -m venv venv
+    ```
+3. Activate envionment
+    ```python
+    source venv/bin/activate
+    ```
+4. Activate envionment
+    ```python
+    pip3 install pytest websockets django pytest-asyncio pytest-django channels prometheus_client
+    ```
+5. Run `pytest tests/` for Smoke test.
+6. Run `python3 tests/load_test_ws.py` for Smoke test.
