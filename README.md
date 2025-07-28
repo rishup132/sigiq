@@ -2,6 +2,10 @@
 
 This project focuses on implementing a production-ready WebSocket service using Django, Channels, and Docker.
 
+You can reference this image in your markdown as follows:
+
+![Project Details](sequence_diagram.png)
+
 ---
 
 ## Tech Stack
@@ -45,7 +49,35 @@ This project focuses on implementing a production-ready WebSocket service using 
    ```bash
    docker exec nginx_proxy promote.sh green/blue 
    ```
-   
+
+---
+
+## Service Endpoints
+
+The application exposes two lightweight HTTP endpoints for monitoring and validation of the currently promoted environment.
+
+1. /version/: Returns the currently active deployment color (e.g., blue or green).
+    - URL: http://localhost:8000/version/
+	- Method: GET
+	- Response:
+        ```json
+        {
+            "version": "blue"
+        }
+        ```
+    - This value is set using the APP_VERSION environment variable (set in docker-compose.yml).
+
+----
+
+2. /healthz/: Basic health check endpoint for container orchestration systems (e.g., Docker, Kubernetes).
+	- URL: http://localhost:8000/healthz/
+	- Method: GET
+	- Response:
+        ```json
+        {
+            "status": "ok"
+        }
+        ```
 ---
 
 ## Testing the WebSocket
