@@ -1,12 +1,15 @@
 import asyncio
 from channels.layers import get_channel_layer
 from chat.consumers import ChatConsumer
+from chat.metrics import last_shutdown_ts
+import time
 
 async def graceful_shutdown():
     print("[shutdown] Graceful shutdown started")
 
     channel_layer = get_channel_layer()
     close_tasks = []
+    last_shutdown_ts.set(int(time.time()))
 
     for channel_name in list(ChatConsumer.active_connections):
         print(f"[shutdown] Closing {channel_name}")

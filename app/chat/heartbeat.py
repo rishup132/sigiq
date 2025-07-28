@@ -13,6 +13,6 @@ async def heartbeat_task():
                 "ts": now
             })
             await asyncio.sleep(30)
-    except asyncio.CancelledError:
-        print("[heartbeat] Cancelled")
+    except Exception as e:
+        print(f"[ALERT] Heartbeat failure: {str(e)}")
         raise
